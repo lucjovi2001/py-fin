@@ -1,4 +1,4 @@
-from PyQt6.QtWidgets import QPushButton, QScrollArea, QVBoxLayout, QWidget
+from PyQt6.QtWidgets import QScrollArea, QVBoxLayout, QWidget
 
 
 class TransactionScrollArea(QScrollArea):
