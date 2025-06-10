@@ -8,4 +8,5 @@ class MainWindow(QMainWindow):
         self.__init_ui()
 
     def __init_ui(self):
+        self.setWindowTitle("PyFin")
         self.resize(720, 720)
