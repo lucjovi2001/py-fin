@@ -23,5 +23,17 @@ def init_db():
         """
     )
 
+    conn.execute(
+        """
+        CREATE TABLE transactions (
+            id INTEGER PRIMARY KEY AUTOINCREMENT,
+            user_id INTEGER REFERENCES users(id),
+            amount REAL NOT NULL,
+            description TEXT,
+            date DATETIME
+        );
+        """
+    )
+
     conn.commit()
     conn.close()
