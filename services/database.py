@@ -25,7 +25,7 @@ def init_db():
 
     conn.execute(
         """
-        CREATE TABLE transactions (
+        CREATE TABLE IF NOT EXISTS transactions (
             id INTEGER PRIMARY KEY AUTOINCREMENT,
             user_id INTEGER REFERENCES users(id),
             amount REAL NOT NULL,
