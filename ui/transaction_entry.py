@@ -1,5 +1,12 @@
 from PyQt6.QtCore import Qt
-from PyQt6.QtWidgets import QComboBox, QHBoxLayout, QLineEdit, QPushButton, QWidget
+from PyQt6.QtWidgets import (
+    QComboBox,
+    QDoubleSpinBox,
+    QHBoxLayout,
+    QLineEdit,
+    QPushButton,
+    QWidget,
+)
 
 MONTHS = [
     "Jan",
@@ -28,10 +35,14 @@ class TransactionEntryWidget(QWidget):
     def __init_ui(self):
         self.__description_entry = QLineEdit()
         self.__description_entry.setPlaceholderText("Description")
+        self.__description_entry.setMinimumWidth(160)
         self.__description_entry.setMaxLength(32)
 
-        self.__amount_entry = QLineEdit()
-        self.__amount_entry.setPlaceholderText("Amount (USD)")
+        self.__amount_entry = QDoubleSpinBox()
+        self.__amount_entry.setPrefix("$")
+        self.__amount_entry.setDecimals(2)
+        self.__amount_entry.setRange(0, 1_000_000_000)
+        self.__amount_entry.setSingleStep(1.00)
 
         self.__month_dropdown = QComboBox()
         self.__month_dropdown.addItems(MONTHS)
@@ -54,3 +65,21 @@ class TransactionEntryWidget(QWidget):
         layout.addWidget(self.__add_button, alignment=Qt.AlignmentFlag.AlignRight)
 
         self.setLayout(layout)
+
+    def __clear_entry_inputs(self):
+        self.__description_entry.clear()
+        self.__amount_entry.clear()
+        self.__amount_entry.setValue(0.00)
+        self.__type_dropdown.setCurrentText("Expense")
+
+    def bind_transaction_add_button(self, callback):
+        self.__add_button.clicked.connect(callback)
+
+    def get_entry_inputs(self):
+        description = self.__description_entry.text().strip()
+        amount = self.__amount_entry.text()
+        month = self.__month_dropdown.currentText()
+        type = self.__type_dropdown.currentText().lower()
+        self.__clear_entry_inputs()
+
+        return (description, amount, month, type)
