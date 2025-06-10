@@ -1,6 +1,8 @@
+from PyQt6.QtCore import Qt
 from PyQt6.QtWidgets import QMainWindow, QVBoxLayout, QWidget
 
-from ui.header_widget import HeaderWidget
+from ui.header import HeaderWidget
+from ui.transaction_entry import TransactionEntryWidget
 
 
 class MainWindow(QMainWindow):
@@ -15,8 +17,12 @@ class MainWindow(QMainWindow):
 
         self.__header = HeaderWidget("Home")
 
+        self.__transaction_input = TransactionEntryWidget()
+
         layout = QVBoxLayout()
         layout.addWidget(self.__header)
+        layout.addWidget(self.__transaction_input, alignment=Qt.AlignmentFlag.AlignTop)
+        layout.addStretch(1)
 
         central_widget = QWidget()
         central_widget.setLayout(layout)

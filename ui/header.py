@@ -17,6 +17,7 @@ class HeaderWidget(QWidget):
 
         layout = QVBoxLayout()
         layout.addWidget(self.__header_label, alignment=Qt.AlignmentFlag.AlignTop)
-        layout.addWidget(self.__hline, alignment=Qt.AlignmentFlag.AlignTop, stretch=1)
+        layout.addWidget(self.__hline, alignment=Qt.AlignmentFlag.AlignTop)
+        layout.addStretch(1)
 
         self.setLayout(layout)
