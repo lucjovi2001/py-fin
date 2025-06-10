@@ -1,4 +1,4 @@
-from PyQt6.QtWidgets import QMainWindow
+from PyQt6.QtWidgets import QMainWindow, QVBoxLayout, QWidget
 
 from ui.header_widget import HeaderWidget
 
@@ -15,4 +15,9 @@ class MainWindow(QMainWindow):
 
         self.__header = HeaderWidget("Home")
 
-        self.setCentralWidget(self.__header)
+        layout = QVBoxLayout()
+        layout.addWidget(self.__header)
+
+        central_widget = QWidget()
+        central_widget.setLayout(layout)
+        self.setCentralWidget(central_widget)
