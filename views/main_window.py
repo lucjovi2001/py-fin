@@ -1,5 +1,7 @@
 from PyQt6.QtWidgets import QMainWindow
 
+from ui.header_widget import HeaderWidget
+
 
 class MainWindow(QMainWindow):
     def __init__(self):
@@ -10,3 +12,7 @@ class MainWindow(QMainWindow):
     def __init_ui(self):
         self.setWindowTitle("PyFin")
         self.resize(720, 720)
+
+        self.__header = HeaderWidget("Home")
+
+        self.setCentralWidget(self.__header)
