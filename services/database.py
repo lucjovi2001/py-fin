@@ -8,4 +8,20 @@ def get_db_connection():
 
 
 def init_db():
-    get_db_connection()
+    conn = get_db_connection()
+
+    conn.execute("PRAGMA key = 'secure_password_placeholder';")
+
+    conn.execute(
+        """
+        CREATE TABLE IF NOT EXISTS users (
+            id INTEGER PRIMARY KEY AUTOINCREMENT,
+            username TEXT NOT NULL,
+            password TEXT NOT NULL,
+            created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+        );
+        """
+    )
+
+    conn.commit()
+    conn.close()
